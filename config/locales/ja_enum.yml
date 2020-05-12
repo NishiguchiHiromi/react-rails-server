@@ -1,0 +1,13 @@
+ja:
+  enums:
+    user:
+      blood_type:
+        a: A
+        b: B
+        o: O
+        ab: AB
+      gender:
+        man: 男性
+        woman: 女性
+        other: その他
+

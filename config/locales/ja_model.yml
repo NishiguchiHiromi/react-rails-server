@@ -1,0 +1,17 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+    attributes:
+      user:
+        name: 氏名
+        mail: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認用）
+        gender: 性別
+        blood_type: 血液型
+  activemodel:
+    attributes:
+  attributes:
+    created_at: 作成日
+    updated_at: 更新日
