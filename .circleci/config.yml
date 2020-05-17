@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
-  aws-ecr: circleci/aws-ecr@1.0.0
-  aws-ecs: circleci/aws-ecs@0.0.6
+  aws-ecr: circleci/aws-ecr@6.8.2
+  aws-ecs: circleci/aws-ecs@1.1.0
 
 executors:
   docker_build:
