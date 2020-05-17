@@ -3,16 +3,16 @@ orbs:
   aws-ecr: circleci/aws-ecr@6.8.2
   aws-ecs: circleci/aws-ecs@1.1.0
 
-executors:
-  docker_build:
-    # machine:
-    #   docker_layer_caching: true
+# executors:
+#   docker_build:
+#     machine:
+#       docker_layer_caching: true
 
 workflows:
   build-and-deploy:
     jobs:
       - aws-ecr/build-and-push-image:
-          executor: docker_build
+          # executor: docker_build
           name: 'build-production'
           account-url: AWS_ECR_ACCOUNT_URL_ENV_VAR_NAME
           region: AWS_DEFAULT_REGION
