@@ -26,9 +26,9 @@ workflows:
           requires:
             - build-production
           aws-region: ${AWS_DEFAULT_REGION}
-          family: "${AWS_RESOURCE_NAME_PREFIX}-service"
-          cluster-name: "${AWS_RESOURCE_NAME_PREFIX}-cluster"
-          container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
+          family: "react-rails-ecs-task-definition-family"
+          cluster-name: "react-rails-ecs-cluster"
+          container-image-name-updates: "container=web,tag=${CIRCLE_SHA1}"
           filters:
             branches:
               only:
