@@ -5,8 +5,8 @@ orbs:
 
 executors:
   docker_build:
-    machine:
-      docker_layer_caching: true
+    # machine:
+    #   docker_layer_caching: true
 
 workflows:
   build-and-deploy:
