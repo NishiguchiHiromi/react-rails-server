@@ -13,6 +13,11 @@ executors:
 workflows:
   build-and-deploy:
     jobs:
+      - run:
+          name: show env
+          command: |
+            echo $RAILS_MASTER_KEY
+
       - aws-ecr/build-and-push-image:
           executor: docker_build
           name: 'build-production'
