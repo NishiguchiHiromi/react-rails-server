@@ -5,8 +5,8 @@ orbs:
 
 executors:
   docker_build:
-    docker:
-      - image: circleci/node:14.0.0-browsers
+    machine:
+      image: 'ubuntu-1604:201903-01'
     environment:
       RAILS_MASTER_KEY: "${RAILS_MASTER_KEY}"
 
