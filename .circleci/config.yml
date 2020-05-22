@@ -27,7 +27,7 @@ workflows:
           aws-region: ${AWS_DEFAULT_REGION}
           family: "react-rails-ecs-task-definition-family"
           cluster-name: "react-rails-ecs-cluster"
-          container-image-name-updates: "container=web,tag=${CIRCLE_SHA1}"
+          container-image-name-updates: "container=web, image-and-tag=${AWS_ECR_ACCOUNT_URL_ENV_VAR_NAME}/${AWS_RESOURCE_NAME_PREFIX}:${CIRCLE_SHA1}"
           filters:
             branches:
               only:
