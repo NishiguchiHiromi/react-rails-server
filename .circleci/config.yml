@@ -12,7 +12,6 @@ workflows:
   build-and-deploy:
     jobs:
       - aws-ecr/build-and-push-image:
-          # executor: docker_build
           name: 'build-production'
           account-url: AWS_ECR_ACCOUNT_URL_ENV_VAR_NAME
           region: AWS_DEFAULT_REGION
