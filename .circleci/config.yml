@@ -6,7 +6,9 @@ orbs:
 commands:
   set-master-key:
     steps:
-      - run: echo "${RAILS_MASTER_KEY}" > /app/config/master.key
+      - run:
+        name: create master.key
+        command: echo "${RAILS_MASTER_KEY}" > /app/config/master.key
 
 
 workflows:
