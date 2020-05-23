@@ -31,7 +31,7 @@ RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
-CMD ["bundle", "exec", "rails", "server"]
+CMD ["scripts/setup.sh"]
 
 
 # FROM ruby:2.6
