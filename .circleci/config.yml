@@ -3,29 +3,10 @@ orbs:
   aws-ecr: circleci/aws-ecr@6.8.2
   aws-ecs: circleci/aws-ecs@1.1.0
 
-jobs:
-  set-master-key:
-    docker:
-      - image: circleci/python:3.4
-    steps:
-      - run:
-          name: pwd
-          command: pwd
-      - run:
-          name: ls -la
-          command: ls -la
-      - run:
-          name: create master.key
-          command: echo "${RAILS_MASTER_KEY}" > ~/app/config/master.key
-
-
 workflows:
   build-and-deploy:
     jobs:
-      - set-master-key
       - aws-ecr/build-and-push-image:
-          requires:
-            - set-master-key
           name: 'build-production'
           account-url: AWS_ECR_ACCOUNT_URL_ENV_VAR_NAME
           region: AWS_DEFAULT_REGION
