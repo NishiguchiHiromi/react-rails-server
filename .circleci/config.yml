@@ -3,23 +3,17 @@ orbs:
   aws-ecr: circleci/aws-ecr@6.8.2
   aws-ecs: circleci/aws-ecs@1.1.0
 
-executors:
-  docker_build:
-    machine:
-      image: 'ubuntu-1604:201903-01'
-    environment:
-      RAILS_MASTER_KEY: "${RAILS_MASTER_KEY}"
+jobs:
+  set-master-key:
+    steps:
+      - run: echo "${RAILS_MASTER_KEY}" > /app/config/master.key
+
 
 workflows:
   build-and-deploy:
     jobs:
-      - run:
-          name: show env
-          command: |
-            echo $RAILS_MASTER_KEY
-
+      - set-master-key
       - aws-ecr/build-and-push-image:
-          executor: docker_build
           name: 'build-production'
           account-url: AWS_ECR_ACCOUNT_URL_ENV_VAR_NAME
           region: AWS_DEFAULT_REGION
