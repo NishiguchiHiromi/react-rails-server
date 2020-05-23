@@ -10,7 +10,7 @@ jobs:
     steps:
       - run:
           name: create master.key
-          command: echo "${RAILS_MASTER_KEY}" > /app/config/master.key
+          command: echo "${RAILS_MASTER_KEY}" > ~/app/config/master.key
 
 
 workflows:
