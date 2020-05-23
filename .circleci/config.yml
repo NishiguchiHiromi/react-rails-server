@@ -3,7 +3,7 @@ orbs:
   aws-ecr: circleci/aws-ecr@6.8.2
   aws-ecs: circleci/aws-ecs@1.1.0
 
-jobs:
+commands:
   set-master-key:
     steps:
       - run: echo "${RAILS_MASTER_KEY}" > /app/config/master.key
