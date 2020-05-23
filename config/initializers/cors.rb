@@ -9,7 +9,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     # 下記origin以外でももしプリフライトリクエストが発生しなければリクエストは成立し、サーバーサイドでの処理も行われる！
     # ただ、下記oprigin以外ではレスポンスを読み込めない
-    origins 'http://localhost:4200'
+    origins ENV.fetch('CORS_ALLOWED_ORIGINS', 'http://localhost:4200')
 
     resource '*',
       # カスタムヘッダを許容
