@@ -28,6 +28,7 @@ COPY . /server
 
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
+RUN chmod +x scripts/setup.sh
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
