@@ -3,12 +3,14 @@ orbs:
   aws-ecr: circleci/aws-ecr@6.8.2
   aws-ecs: circleci/aws-ecs@1.1.0
 
-commands:
+jobs:
   set-master-key:
+    docker:
+      - image: circleci/python:3.4
     steps:
       - run:
-        name: create master.key
-        command: echo "${RAILS_MASTER_KEY}" > /app/config/master.key
+          name: create master.key
+          command: echo "${RAILS_MASTER_KEY}" > /app/config/master.key
 
 
 workflows:
