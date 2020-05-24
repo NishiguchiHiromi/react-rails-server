@@ -31,9 +31,13 @@ module Server
       if Rails.env.development? || Rails.env.test?
         super
       else
+        puts "config/credentials/#{ENV['SERVER_ENV']}.yml.enc"
+        puts "config/credentials/#{Rails.env.downcase}.key"
+        puts ENV['SERVER_ENV']
+        puts ENV['RAILS_MASTER_KEY']
         @credentials ||= encrypted(
-          "config/credentials.#{ENV['SERVER_ENV']}.yml.enc",
-          key_path: "config/#{ENV['SERVER_ENV']}.key"
+          "config/credentials/#{ENV['SERVER_ENV']}.yml.enc",
+          key_path: "config/credentials/#{ENV['SERVER_ENV']}.key"
         )
       end
     end
