@@ -29,6 +29,7 @@ workflows:
       - aws-ecs/deploy-service-update:
           requires:
             - staging_build
+          name: 'staging_deploy'
           aws-region: ${AWS_DEFAULT_REGION}
           family: todo
           cluster-name: todo
@@ -46,6 +47,7 @@ workflows:
       - aws-ecs/deploy-service-update:
           requires:
             - production_build
+          name: 'production_deploy'
           aws-region: ${AWS_DEFAULT_REGION}
           family: "react-rails-ecs-task-definition-family"
           cluster-name: "ecs-cluster"
