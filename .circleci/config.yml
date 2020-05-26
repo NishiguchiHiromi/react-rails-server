@@ -3,28 +3,59 @@ orbs:
   aws-ecr: circleci/aws-ecr@6.8.2
   aws-ecs: circleci/aws-ecs@1.1.0
 
-workflows:
-  build-and-deploy:
-    jobs:
+references:
+  filters:
+    staging_branch_filter: &staging_branch_filter
+      filters:
+        branches:
+          only:
+            - staging
+    master_branch_filter: &master_branch_filter
+      filters:
+        branches:
+          only:
+            - master
+
+jobs:
+  staging_build_and_push:
+    steps:
+      - run : echo "todo"
+  production_build_and_push:
+    steps:
       - aws-ecr/build-and-push-image:
           name: 'build-production'
           account-url: AWS_ECR_ACCOUNT_URL_ENV_VAR_NAME
           region: AWS_DEFAULT_REGION
           repo: "${AWS_RESOURCE_NAME_PREFIX}"
           tag: "${CIRCLE_SHA1}"
-          filters:
-            branches:
-              only:
-                - master
+
+  staging_deploy:
+    steps:
+      - run : echo "todo"
+  production_deploy:
+    steps:
       - aws-ecs/deploy-service-update:
-          requires:
-            - build-production
           aws-region: ${AWS_DEFAULT_REGION}
           family: "react-rails-ecs-task-definition-family"
           cluster-name: "ecs-cluster"
           service-name: "react-rails-ecs-service-web"
           container-image-name-updates: "container=web, image-and-tag=${AWS_ECR_ACCOUNT_URL_ENV_VAR_NAME}/${AWS_RESOURCE_NAME_PREFIX}:${CIRCLE_SHA1}"
-          filters:
-            branches:
-              only:
-                - master
+
+workflows:
+  build-and-deploy:
+    jobs:
+      # stagingブランチ
+      - staging_build_and_push:
+          <<: *staging_branch_filter
+      - staging_deploy:
+          requires:
+            - staging_build_and_push
+          <<: *staging_branch_filter
+
+      # masterブランチ
+      - production_build_and_push:
+          <<: *master_branch_filter
+      - production_deploy:
+          requires:
+            - production_build_and_push
+          <<: *master_branch_filter
