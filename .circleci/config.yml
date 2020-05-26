@@ -16,11 +16,22 @@ references:
           only:
             - master
 
+executors:
+  build_and_push:
+    machine:
+      image: ubuntu-1604:201903-01
+      docker_layer_caching: false
+  deploy:
+    machine:
+      image: circleci/python:3.7.1
+
 jobs:
   staging_build_and_push:
+    executor: build_and_push
     steps:
       - run : echo "todo"
   production_build_and_push:
+    executor: build_and_push
     steps:
       - aws-ecr/build-and-push-image:
           name: 'build-production'
@@ -30,9 +41,11 @@ jobs:
           tag: "${CIRCLE_SHA1}"
 
   staging_deploy:
+    executor: deploy
     steps:
       - run : echo "todo"
   production_deploy:
+    executor: deploy
     steps:
       - aws-ecs/deploy-service-update:
           aws-region: ${AWS_DEFAULT_REGION}
