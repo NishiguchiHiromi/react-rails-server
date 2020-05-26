@@ -34,7 +34,6 @@ jobs:
     executor: build_and_push
     steps:
       - aws-ecr/build-and-push-image:
-          name: 'build-production'
           account-url: AWS_ECR_ACCOUNT_URL_ENV_VAR_NAME
           region: AWS_DEFAULT_REGION
           repo: "${AWS_RESOURCE_NAME_PREFIX}"
