@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       end
       resources :hobbies, only: [:index, :show, :create, :update, :destroy]
       # mount_devise_token_auth_for 'User', at: 'auth'
+      resource :department, only: [:show, :create]
     end
   end
 end
