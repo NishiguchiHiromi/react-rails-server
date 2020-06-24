@@ -15,7 +15,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
       # カスタムヘッダを許容
       # プリフライトリクエストのAccess-Control-Request-Headers（ブラウザが勝手に付与）を照らし合わせて
       # 問題なければAccess-Control-Allow-Headersを返す
-      headers: ['My-Header'],
+      headers: ['My-Header', 'X-CSRF-Token'],
       # メソッドを許容
       # プリフライトリクエストのAccess-Control-Request-Method（ブラウザが勝手に付与）を照らし合わせて
       # 問題なければAccess-Control-Allow-Methodsを返す

@@ -2,10 +2,11 @@ module Api
   module V1
     class SessionsController < ApplicationController
       skip_before_action :require_login
+      skip_before_action :verify_authenticity_token, only: [:create]
 
       def show
         if logged_in?
-          render json: { loginUser: current_user }
+          render json: { loginUser: current_user, csrf_token: form_authenticity_token }
         else
           render status: 401, json: { status: 'Unauthorized' }
         end
@@ -25,7 +26,7 @@ module Api
         user = User.find_by(mail: session_params[:mail])
         if user&.authenticate(session_params[:password]) && !user.locked?
           login(user)
-          render json: { loginUser: current_user }
+          render json: { loginUser: current_user, csrf_token: form_authenticity_token }
         else
           user&.increment_sign_in_failed!
           render status: 401, json: { status: 'Unauthorized', message: 'メールアドレスまたはパスワードが違います。' }

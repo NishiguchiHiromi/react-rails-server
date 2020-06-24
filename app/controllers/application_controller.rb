@@ -1,7 +1,4 @@
-class ApplicationController < ActionController::API
-  include ActionController::Cookies
-  include AbstractController::Helpers
-  helper_method :current_user
+class ApplicationController < ActionController::Base
 
   before_action :check_custom_header
   before_action :require_login
